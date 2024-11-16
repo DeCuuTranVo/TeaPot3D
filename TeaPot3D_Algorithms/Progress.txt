@@ -1,0 +1,35 @@
+﻿Scrum 1
+1. Read in the .obj file and print file content (done)
+2. Model the vertices and faces (done)
+3. Read in .obj file to vertices and faces (done)
+4. Split vertices set into two set (with x <= 0 and x >= 0);
+5. Count number of faces that cut the Oyz plane
+
+
+
+3. Split the point cloud by half
+4. Output 2 resultant .obj files
+
+
+
+Read Text File
+https://learn.microsoft.com/en-us/troubleshoot/developer/visualstudio/csharp/language-compilers/read-write-text-file
+
+https://www.c-sharpcorner.com/UploadFile/mahesh/how-to-read-a-text-file-in-C-Sharp/
+
+
+Find intersection between and plane and a line
+https://math.libretexts.org/Bookshelves/Calculus/Supplemental_Modules_(Calculus)/Multivariable_Calculus/1%3A_Vectors_in_Space/Intersection_of_a_Line_and_a_Plane
+
+Equation of a plane
+https://mathworld.wolfram.com/Plane.html
+
+Point below or about plane.
+substitute point coordinates to plane.
+
+Write Text File
+https://www.c-sharpcorner.com/article/c-sharp-write-to-file/
+
+!!!
+Write an algorithm to split a polygon to multiple triangle
+Write an algorithm to handle cross_plan cases
