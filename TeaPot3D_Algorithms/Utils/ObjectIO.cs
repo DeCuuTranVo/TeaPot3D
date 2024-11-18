@@ -34,9 +34,9 @@ namespace TeaPot3D_Algorithms.Utils
                     Vertex curVertex = new Vertex()
                     {
                         Id = vertexCount,
-                        X = decimal.Parse(words[1]),
-                        Y = decimal.Parse(words[2]),
-                        Z = decimal.Parse(words[3]),
+                        X = float.Parse(words[1]),
+                        Y = float.Parse(words[2]),
+                        Z = float.Parse(words[3]),
                     };
 
                     vertices.Add(vertexCount, curVertex);

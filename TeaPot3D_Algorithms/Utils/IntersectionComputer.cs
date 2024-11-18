@@ -37,9 +37,9 @@ namespace TeaPot3D_Algorithms.Utils
                 return new Vertex()
                 {
                     Id = 0,
-                    X = (decimal)intersectionPoint.Value.X,
-                    Y = (decimal)intersectionPoint.Value.Y,
-                    Z = (decimal)intersectionPoint.Value.Z
+                    X = (float)intersectionPoint.Value.X,
+                    Y = (float)intersectionPoint.Value.Y,
+                    Z = (float)intersectionPoint.Value.Z
                 };
             }
             else

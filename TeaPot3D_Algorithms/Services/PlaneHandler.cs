@@ -12,19 +12,24 @@ namespace TeaPot3D_Algorithms.Services
     {
         public static PointPlanePosition PlanePosition(Plane pPlane, Vertex pVertex)
         {
-            decimal positionValue = pPlane.A * pVertex.X + pPlane.B * pVertex.Y + pPlane.C * pVertex.Z + pPlane.D;
+            float positionValue = pPlane.A * pVertex.X + pPlane.B * pVertex.Y + pPlane.C * pVertex.Z + pPlane.D;
+            
+            if (Math.Abs(positionValue) <= float.Epsilon)
+            {
+                return PointPlanePosition.OnPlane;
+            }
+
             if (positionValue > 0)
             {
                 return PointPlanePosition.Above;
             }
-            else if (positionValue < 0)
+            
+            if (positionValue < 0)
             {
                 return PointPlanePosition.Below;
             }
-            else
-            {
-                return PointPlanePosition.OnPlane;
-            }
+
+            throw new InvalidOperationException("This state is invalid.");      
         }
 
         public static FacePlanePosition PlanePosition(Plane pPlane, Face face, Dictionary<int, Vertex> pVertexDict)

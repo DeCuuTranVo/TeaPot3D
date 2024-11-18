@@ -8,17 +8,17 @@ namespace TeaPot3D_Algorithms.Models
 {
     public class ObjectStatistics
     {
-        public decimal MaxX { get; set; } = decimal.MinValue;
-        public decimal MaxY { get; set; } = decimal.MinValue;
-        public decimal MaxZ { get; set; } = decimal.MinValue;
+        public float MaxX { get; set; } = float.MinValue;
+        public float MaxY { get; set; } = float.MinValue;
+        public float MaxZ { get; set; } = float.MinValue;
 
-        public decimal MinX { get; set; } = decimal.MaxValue;
-        public decimal MinY { get; set; } = decimal.MaxValue;
-        public decimal MinZ { get; set; } = decimal.MaxValue;
+        public float MinX { get; set; } = float.MaxValue;
+        public float MinY { get; set; } = float.MaxValue;
+        public float MinZ { get; set; } = float.MaxValue;
 
-        public decimal MidX { get; set; } = 0;
-        public decimal MidY { get; set; } = 0;
-        public decimal MidZ { get; set; } = 0;
+        public float MidX { get; set; } = 0;
+        public float MidY { get; set; } = 0;
+        public float MidZ { get; set; } = 0;
 
 
     }

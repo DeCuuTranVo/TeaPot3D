@@ -22,7 +22,7 @@ namespace TeaPot3D_Algorithms.Utils
         // Case 2: 1 above, 1 on plane, 1 below
 
         // Output: Return 3 new triangles (case 1) or 2 new triangles (case 2)
-        public static SlicedFaceModel Process(Plane pPlane, Face pFace, Object3D pObj)
+        public static SlicedFaceVertexModel Process(Plane pPlane, Face pFace, Object3D pObj)
         {
             Dictionary<PointPlanePosition, List<Vertex>> faceVerticesDict = new Dictionary<PointPlanePosition, List<Vertex>>();
 
@@ -60,9 +60,9 @@ namespace TeaPot3D_Algorithms.Utils
         //Separate those faces between above and below plane then add new faces to SlicedFaceModel
         //Return
         // Case 1: (2 above && 1 below) || (1 above && 2 below)
-        public static SlicedFaceModel SliceCaseOne(Plane pPlane, Dictionary<PointPlanePosition, List<Vertex>> pFaceVerticesDict, Object3D pObj)
+        public static SlicedFaceVertexModel SliceCaseOne(Plane pPlane, Dictionary<PointPlanePosition, List<Vertex>> pFaceVerticesDict, Object3D pObj)
         {
-            SlicedFaceModel slicedFaceModel = new SlicedFaceModel();
+            SlicedFaceVertexModel slicedFaceModel = new SlicedFaceVertexModel();
             List<PointsOnLineSet> pointsOnLineSetList = new List<PointsOnLineSet>();
 
             //For each pair of vertices above and below plane, compute 1 intersection vertex
@@ -76,7 +76,8 @@ namespace TeaPot3D_Algorithms.Utils
                     // Check if vertex really on plane
 
                     //
-                    vertexIntersect.Id = pObj.Vertices.Count;
+                    //vertexIntersect.Id = pObj.Vertices.Count + 1;
+                    vertexIntersect.Id = pObj.Vertices.MaxBy(x => x.Key).Key + 1;
 
                     pFaceVerticesDict[PointPlanePosition.OnPlane].Add(vertexIntersect);
 
@@ -89,6 +90,7 @@ namespace TeaPot3D_Algorithms.Utils
                     pointsOnLineSetList.Add(set);
 
                     pObj.Vertices.Add(vertexIntersect.Id, vertexIntersect);
+                    slicedFaceModel.VerticesOnPlane.Add(set.PointOnPlane);
                 }
             }
 
@@ -97,7 +99,8 @@ namespace TeaPot3D_Algorithms.Utils
 
                 Face faceAbovePlane1 = new Face()
                 {
-                    Id = pObj.Faces.Count
+                    //Id = pObj.Faces.Count + 1
+                    Id = pObj.Faces.MaxBy(x => x.Key).Key + 1
                 };
                 faceAbovePlane1.Vertices = new List<int>
                 {
@@ -108,7 +111,8 @@ namespace TeaPot3D_Algorithms.Utils
 
                 Face faceAbovePlane2 = new Face()
                 {
-                    Id = pObj.Faces.Count + 1
+                    //Id = pObj.Faces.Count + 2
+                    Id = pObj.Faces.MaxBy(x => x.Key).Key + 2
                 };
                 faceAbovePlane2.Vertices = new List<int>
                 {
@@ -119,7 +123,8 @@ namespace TeaPot3D_Algorithms.Utils
 
                 Face faceBelowPlane = new Face()
                 { 
-                    Id = pObj.Faces.Count + 2 
+                    //Id = pObj.Faces.Count + 3
+                    Id = pObj.Faces.MaxBy(x => x.Key).Key + 3
                 };
                 faceBelowPlane.Vertices = new List<int>
                 {
@@ -141,7 +146,8 @@ namespace TeaPot3D_Algorithms.Utils
             {
                 Face faceBelowPlane1 = new Face()
                 {
-                    Id = pObj.Faces.Count
+                    //Id = pObj.Faces.Count + 1
+                    Id = pObj.Faces.MaxBy(x => x.Key).Key + 1
                 };
                 faceBelowPlane1.Vertices = new List<int>
                 {
@@ -152,7 +158,8 @@ namespace TeaPot3D_Algorithms.Utils
 
                 Face faceBelowPlane2 = new Face()
                 {
-                    Id = pObj.Faces.Count + 1
+                    //Id = pObj.Faces.Count + 2
+                    Id = pObj.Faces.MaxBy(x => x.Key).Key + 2
                 };
                 faceBelowPlane2.Vertices = new List<int>
                 {
@@ -163,7 +170,8 @@ namespace TeaPot3D_Algorithms.Utils
 
                 Face faceAbovePlane = new Face()
                 {
-                    Id = pObj.Faces.Count + 2
+                    //Id = pObj.Faces.Count + 3
+                    Id = pObj.Faces.MaxBy(x => x.Key).Key + 3
                 };
                 faceAbovePlane.Vertices = new List<int>
                 {
@@ -186,9 +194,9 @@ namespace TeaPot3D_Algorithms.Utils
 
 
         // Case: One point above plane, one point below plane, one point on plane
-        public static SlicedFaceModel SliceCaseTwo(Plane pPlane, Dictionary<PointPlanePosition, List<Vertex>> pFaceVerticesDict, Object3D pObj)
+        public static SlicedFaceVertexModel SliceCaseTwo(Plane pPlane, Dictionary<PointPlanePosition, List<Vertex>> pFaceVerticesDict, Object3D pObj)
         {
-            SlicedFaceModel slicedFaceModel = new SlicedFaceModel();
+            SlicedFaceVertexModel slicedFaceModel = new SlicedFaceVertexModel();
             List<PointsOnLineSet> pointsOnLineSetList = new List<PointsOnLineSet>();
 
             Vertex pointOnPlaneInitial = pFaceVerticesDict[PointPlanePosition.OnPlane][0];
@@ -204,7 +212,8 @@ namespace TeaPot3D_Algorithms.Utils
                     // Check if vertex really on plane
 
                     //
-                    vertexIntersect.Id = pObj.Vertices.Count;
+                    //vertexIntersect.Id = pObj.Vertices.Count + 1;
+                    vertexIntersect.Id = pObj.Vertices.MaxBy(x => x.Key).Key + 1;
 
                     pFaceVerticesDict[PointPlanePosition.OnPlane].Add(vertexIntersect);
 
@@ -217,12 +226,14 @@ namespace TeaPot3D_Algorithms.Utils
                     pointsOnLineSetList.Add(set);
 
                     pObj.Vertices.Add(vertexIntersect.Id, vertexIntersect);
+                    slicedFaceModel.VerticesOnPlane.Add(set.PointOnPlane);
                 }
             }
 
             Face faceAbovePlane = new Face()
             {
-                Id = pObj.Faces.Count
+                //Id = pObj.Faces.Count + 1
+                Id = pObj.Faces.MaxBy(x => x.Key).Key + 1
             };
             faceAbovePlane.Vertices = new List<int>
             {
@@ -233,7 +244,8 @@ namespace TeaPot3D_Algorithms.Utils
 
             Face faceBelowPlane = new Face()
             {
-                Id = pObj.Faces.Count + 1
+                //Id = pObj.Faces.Count + 2
+                Id = pObj.Faces.MaxBy(x => x.Key).Key + 2
             };
             faceBelowPlane.Vertices = new List<int>
             {

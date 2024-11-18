@@ -13,19 +13,19 @@ namespace TeaPot3D_Algorithms.Models
         // Y(t) = Y(0) + B*t
         // Z(t) = Z(0) + C*t
 
-        public decimal X0 { get; set; } = 0;
-        public decimal Y0 { get; set;} = 0;
-        public decimal Z0 { get; set;} = 0; 
+        public float X0 { get; set; } = 0;
+        public float Y0 { get; set;} = 0;
+        public float Z0 { get; set;} = 0; 
 
-        public decimal A { get; set;} = 0;
-        public decimal B { get; set;} = 0;
-        public decimal C { get; set; } = 0;
+        public float A { get; set;} = 0;
+        public float B { get; set;} = 0;
+        public float C { get; set; } = 0;
 
         public Vector3 LinePoint
         {
             get
             {
-                return new Vector3((float)this.X0, (float)this.Y0, (float)this.Z0);
+                return new Vector3(this.X0, this.Y0, this.Z0);
             }        
         }
 
@@ -33,7 +33,7 @@ namespace TeaPot3D_Algorithms.Models
         {
             get
             {
-                return new Vector3((float)this.A, (float)this.B, (float)this.C);
+                return new Vector3(this.A, this.B, this.C);
             }              
         }
     }

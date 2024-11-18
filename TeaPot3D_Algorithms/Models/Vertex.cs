@@ -9,8 +9,8 @@ namespace TeaPot3D_Algorithms.Models
     public class Vertex
     {
         public int Id { get; set; } = 0;
-        public decimal X { get; set; } = 0;
-        public decimal Y { get; set; } = 0;
-        public decimal Z { get; set; } = 0;
+        public float X { get; set; } = 0;
+        public float Y { get; set; } = 0;
+        public float Z { get; set; } = 0;
     }
 }

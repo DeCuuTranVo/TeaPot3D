@@ -91,30 +91,46 @@ namespace TeaPot3D_Algorithms.Utils
                 }
             }
 
-            //foreach (var faceItem in FaceCrossPlaneDict.Values)
-            //{
-            //    SlicedFaceModel curSlicedFaceModel = TriangleSlicer.Process(_slicingPlane, faceItem, _object3D);
-            //}
+            foreach (var faceItem in FaceCrossPlaneDict.Values)
+            {
+                SlicedFaceVertexModel curSlicedFaceModel = TriangleSlicer.Process(_slicingPlane, faceItem, _object3D);
+                foreach (var faceAbove in curSlicedFaceModel.FacesAbovePLane)
+                {
+                    FaceAbovePlaneDict.Add(faceAbove.Id, faceAbove);
+                }
+
+                foreach (var faceBelow in curSlicedFaceModel.FacesBelowPlane)
+                {
+                    FaceBelowPlaneDict.Add(faceBelow.Id, faceBelow);
+                }
+
+                foreach (var vertexOnPlane in curSlicedFaceModel.VerticesOnPlane)
+                {
+                    PointOnPlaneDict.Add(vertexOnPlane.Id, vertexOnPlane);
+                }
+            }
 
             Object3D objectAbovePlane = new Object3D()
             {
-                Vertices = PointAbovePlaneDict.Concat(PointOnPlaneDict).ToDictionary(x => x.Key, x => x.Value ),
-                Faces = FaceAbovePlaneDict.Concat(FaceCoincidentPlaneDict).ToDictionary(x => x.Key, x => x.Value)
+                Vertices = PointAbovePlaneDict.Concat(PointOnPlaneDict).Concat(PointBelowPlaneDict).ToDictionary(x => x.Key, x => x.Value ),
+                Faces = FaceAbovePlaneDict.Concat(FaceCoincidentPlaneDict).ToDictionary(x => x.Key, x => x.Value),
+                //Faces = FaceAbovePlaneDict.Concat(FaceCrossPlaneDict).ToDictionary(x => x.Key, x => x.Value),
+                //Faces = FaceAbovePlaneDict.ToDictionary(x => x.Key, x => x.Value)
             };
 
             Object3D objectBelowPlane = new Object3D()
             {
-                Vertices = PointBelowPlaneDict.Concat(PointOnPlaneDict).ToDictionary(x => x.Key, x => x.Value),
-                Faces = FaceBelowPlaneDict.Concat(FaceCoincidentPlaneDict).ToDictionary(x => x.Key, x => x.Value)
+                Vertices = PointBelowPlaneDict.Concat(PointOnPlaneDict).Concat(PointAbovePlaneDict).ToDictionary(x => x.Key, x => x.Value),
+                Faces = FaceBelowPlaneDict.Concat(FaceCoincidentPlaneDict).ToDictionary(x => x.Key, x => x.Value),
+                //Faces = FaceBelowPlaneDict.Concat(FaceCrossPlaneDict).ToDictionary(x => x.Key, x => x.Value),
+                //Faces = FaceBelowPlaneDict.ToDictionary(x => x.Key, x => x.Value),
             };
 
             return new List<Object3D>() { objectAbovePlane, objectBelowPlane };
         }
 
         // Find intersection between a line and and plane
-
         // Add the intersection face to both splitted objects
-
         // Split a polygon into triangles
     }
 }
