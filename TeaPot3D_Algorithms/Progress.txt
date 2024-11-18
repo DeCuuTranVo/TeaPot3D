@@ -3,12 +3,16 @@
 2. Model the vertices and faces (done)
 3. Read in .obj file to vertices and faces (done)
 4. Split vertices set into two set (with x <= 0 and x >= 0);
+5. Split the point cloud by one plane (done)
+6. Split the point cloud by multiple plane
+
+
 5. Count number of faces that cut the Oyz plane
 
 
 
-3. Split the point cloud by half
-4. Output 2 resultant .obj files
+
+4. Output 2 resultant .obj files (done)
 
 
 
@@ -33,3 +37,6 @@ https://www.c-sharpcorner.com/article/c-sharp-write-to-file/
 !!!
 Write an algorithm to split a polygon to multiple triangle
 Write an algorithm to handle cross_plan cases
+
+3D line plane intersection
+https://stackoverflow.com/questions/5666222/3d-line-plane-intersection

@@ -91,16 +91,21 @@ namespace TeaPot3D_Algorithms.Utils
                 }
             }
 
+            //foreach (var faceItem in FaceCrossPlaneDict.Values)
+            //{
+            //    SlicedFaceModel curSlicedFaceModel = TriangleSlicer.Process(_slicingPlane, faceItem, _object3D);
+            //}
+
             Object3D objectAbovePlane = new Object3D()
             {
                 Vertices = PointAbovePlaneDict.Concat(PointOnPlaneDict).ToDictionary(x => x.Key, x => x.Value ),
-                Faces = FaceAbovePlaneDict
+                Faces = FaceAbovePlaneDict.Concat(FaceCoincidentPlaneDict).ToDictionary(x => x.Key, x => x.Value)
             };
 
             Object3D objectBelowPlane = new Object3D()
             {
                 Vertices = PointBelowPlaneDict.Concat(PointOnPlaneDict).ToDictionary(x => x.Key, x => x.Value),
-                Faces = FaceBelowPlaneDict
+                Faces = FaceBelowPlaneDict.Concat(FaceCoincidentPlaneDict).ToDictionary(x => x.Key, x => x.Value)
             };
 
             return new List<Object3D>() { objectAbovePlane, objectBelowPlane };

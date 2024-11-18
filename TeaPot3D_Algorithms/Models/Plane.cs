@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using TeaPot3D_Algorithms.StaticDetails;
@@ -21,6 +22,21 @@ namespace TeaPot3D_Algorithms.Models
             C = pC;
             D = pD;
         }
-       
+
+        public Vector3 PlanePoint
+        {
+            get
+            {
+                return new Vector3((float)(-this.D / this.A), (float)0, (float)0);
+            }      
+        }
+
+        public Vector3 PlaneNormVector
+        {
+            get
+            {
+                return new Vector3((float)this.A, (float)this.B, (float)this.C);
+            }          
+        }
     }
 }
